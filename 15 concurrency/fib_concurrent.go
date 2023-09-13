@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func fib(number float64, ch chan float64) {
+func fibConcurrent(number float64, ch chan float64) {
 	x, y := 1.0, 1.0
 	for i := 0; i < int(number); i++ {
 		x, y = y, x+y
@@ -21,7 +21,7 @@ func main() {
 	ch := make(chan float64, size)
 
 	for i := 1; i < size; i++ {
-		go fib(float64(i), ch)
+		go fibConcurrent(float64(i), ch)
 	}
 
 	for i := 1; i < size; i++ {
